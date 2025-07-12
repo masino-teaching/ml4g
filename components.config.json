@@ -1,0 +1,32 @@
+{
+  "components": {
+    "ClusteringCoefficientDemo": {
+      "topic": "network-metrics",
+      "title": "Network Clustering Coefficient",
+      "description": "Interactive exploration of network clustering coefficient.",
+      "order": 1
+    }
+  },
+  "topics": {
+    "network-metrics": {
+      "title": "Network Metrics",
+      "description": "Graph theory and network metrics fundamentals",
+      "order": 1
+    }
+  },
+  "notebooks": {
+    "test": {
+      "topic": "network-metrics",
+      "title": "Jupyter Notebook Test",
+      "description": "A test Jupyter notebook for interactive learning.",
+      "github_path": "notebooks/test.ipynb",
+      "order": 10
+    }
+  },
+  "repository": {
+    "owner": "masino-teaching",
+    "name": "ml4g",
+    "branch": "main"
+  }
+
+}

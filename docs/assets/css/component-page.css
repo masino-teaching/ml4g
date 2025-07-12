@@ -1,0 +1,79 @@
+
+/* Component page styling */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #212529;
+    line-height: 1.6;
+}
+
+.component-header {
+    background: white;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.breadcrumb a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.component-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #2980b9;
+}
+
+.component-main {
+    padding: 2rem;
+    min-height: calc(100vh - 200px);
+}
+
+#react-root {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-height: 500px;
+}
+
+.component-footer {
+    background: white;
+    border-top: 1px solid #dee2e6;
+    padding: 1rem 2rem;
+    text-align: center;
+}
+
+.component-footer a {
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.component-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .component-header, .component-main, .component-footer {
+        padding: 1rem;
+    }
+    
+    .component-header h1 {
+        font-size: 1.5rem;
+    }
+}
