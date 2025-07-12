@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exact vs Asymptotic Edge Density</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .comparison-table {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 8px 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .comparison-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .exact-row {
+            background-color: #e8f5e8;
+        }
+        .asymptotic-row {
+            background-color: #fff3e0;
+        }
+        .graphs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .graph-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .graph-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .graph-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+        .stat-box {
+            padding: 10px;
+            border-radius: 5px;
+            line-height: 1.3;
+        }
+        .exact-stats {
+            background-color: #e8f5e8;
+            border: 1px solid #4CAF50;
+        }
+        .asymptotic-stats {
+            background-color: #fff3e0;
+            border: 1px solid #FF9800;
+        }
+        .graph-svg {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .node {
+            fill: #4CAF50;
+            stroke: #2E7D32;
+            stroke-width: 2;
+        }
+        .edge {
+            stroke: #666;
+            stroke-width: 1.5;
+        }
+        .node-label {
+            fill: white;
+            font-size: 11px;
+            font-weight: bold;
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+        .formula {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+        .toggle-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .toggle-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 5px;
+        }
+        .toggle-btn:hover {
+            background: #1976D2;
+        }
+        .toggle-btn.active {
+            background: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Exact vs Asymptotic Edge Density in Undirected Graphs</h1>
+            <div class="formula">
+                <strong>Exact Formula:</strong> m = p × n(n-1)/2<br>
+                <strong>Asymptotic Formula (large n):</strong> m ≈ p × n²/2<br>
+                <strong>For p = 0.5:</strong> m ≈ n²/4<br>
+                <em>The asymptotic approximation becomes more accurate as n increases</em>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color exact-stats"></div>
+                    <span>Exact Formula</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color asymptotic-stats"></div>
+                    <span>Asymptotic Formula</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comparison-table">
+            <h3>Comparison Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>n (nodes)</th>
+                        <th>4</th>
+                        <th>6</th>
+                        <th>8</th>
+                        <th>10</th>
+                        <th>20</th>
+                        <th>50</th>
+                        <th>100</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="exact-row">
+                        <td><strong>Exact m</strong></td>
+                        <td>3</td>
+                        <td>8</td>
+                        <td>14</td>
+                        <td>23</td>
+                        <td>95</td>
+                        <td>613</td>
+                        <td>2475</td>
+                    </tr>
+                    <tr class="asymptotic-row">
+                        <td><strong>Asymptotic m</strong></td>
+                        <td>4</td>
+                        <td>9</td>
+                        <td>16</td>
+                        <td>25</td>
+                        <td>100</td>
+                        <td>625</td>
+                        <td>2500</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Relative Error</strong></td>
+                        <td>33.3%</td>
+                        <td>12.5%</td>
+                        <td>14.3%</td>
+                        <td>8.7%</td>
+                        <td>5.3%</td>
+                        <td>2.0%</td>
+                        <td>1.0%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="toggle-container">
+            <button class="toggle-btn active" onclick="showGraphs('exact')">Show Exact Edge Counts</button>
+            <button class="toggle-btn" onclick="showGraphs('asymptotic')">Show Asymptotic Edge Counts</button>
+            <button class="toggle-btn" onclick="showGraphs('both')">Show Both</button>
+        </div>
+        
+        <div class="graphs-container" id="graphsContainer">
+        </div>
+    </div>
+
+    <script>
+        // Graph configurations
+        const graphConfigs = [
+            { nodes: 4, exactEdges: 3, asymptoticEdges: 4 },
+            { nodes: 6, exactEdges: 8, asymptoticEdges: 9 },
+            { nodes: 8, exactEdges: 14, asymptoticEdges: 16 },
+            { nodes: 10, exactEdges: 23, asymptoticEdges: 25 }
+        ];
+
+        let currentMode = 'exact';
+
+        // Function to generate random edges while avoiding duplicates
+        function generateEdges(numNodes, numEdges) {
+            const edges = new Set();
+            const maxPossibleEdges = numNodes * (numNodes - 1) / 2;
+            
+            if (numEdges > maxPossibleEdges) {
+                numEdges = maxPossibleEdges;
+            }
+            
+            // For small graphs, use a more systematic approach to ensure good distribution
+            if (numNodes <= 10) {
+                const allPossibleEdges = [];
+                for (let i = 0; i < numNodes; i++) {
+                    for (let j = i + 1; j < numNodes; j++) {
+                        allPossibleEdges.push([i, j]);
+                    }
+                }
+                
+                // Shuffle and take first numEdges
+                for (let i = allPossibleEdges.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [allPossibleEdges[i], allPossibleEdges[j]] = [allPossibleEdges[j], allPossibleEdges[i]];
+                }
+                
+                return allPossibleEdges.slice(0, numEdges);
+            }
+            
+            // For larger graphs, use random generation
+            while (edges.size < numEdges) {
+                const node1 = Math.floor(Math.random() * numNodes);
+                let node2 = Math.floor(Math.random() * numNodes);
+                
+                if (node1 !== node2) {
+                    const edge = node1 < node2 ? `${node1}-${node2}` : `${node2}-${node1}`;
+                    edges.add(edge);
+                }
+            }
+            
+            return Array.from(edges).map(edge => {
+                const [a, b] = edge.split('-').map(Number);
+                return [a, b];
+            });
+        }
+
+        // Function to position nodes in a circle
+        function getNodePositions(numNodes, radius, centerX, centerY) {
+            const positions = [];
+            for (let i = 0; i < numNodes; i++) {
+                const angle = (2 * Math.PI * i) / numNodes - Math.PI / 2;
+                positions.push({
+                    x: centerX + radius * Math.cos(angle),
+                    y: centerY + radius * Math.sin(angle)
+                });
+            }
+            return positions;
+        }
+
+        // Function to create SVG graph
+        function createGraph(config, mode) {
+            const { nodes: numNodes, exactEdges, asymptoticEdges } = config;
+            const svgSize = 260;
+            const radius = 70;
+            const centerX = svgSize / 2;
+            const centerY = svgSize / 2;
+            
+            // Calculate statistics
+            const maxEdges = numNodes * (numNodes - 1) / 2;
+            const exactDensity = exactEdges / maxEdges;
+            const asymptoticDensity = asymptoticEdges / maxEdges;
+            const relativeError = Math.abs(exactEdges - asymptoticEdges) / exactEdges * 100;
+            
+            // Create container
+            const container = document.createElement('div');
+            container.className = 'graph-panel';
+            container.setAttribute('data-mode', mode);
+            
+            // Add title
+            const title = document.createElement('div');
+            title.className = 'graph-title';
+            title.textContent = `Graph with ${numNodes} nodes`;
+            container.appendChild(title);
+            
+            // Add stats based on mode
+            const statsContainer = document.createElement('div');
+            statsContainer.className = 'graph-stats';
+            
+            if (mode === 'exact' || mode === 'both') {
+                const exactStats = document.createElement('div');
+                exactStats.className = 'stat-box exact-stats';
+                exactStats.innerHTML = `
+                    <strong>Exact Formula</strong><br>
+                    Edges: ${exactEdges}<br>
+                    Density: ${exactDensity.toFixed(3)}
+                `;
+                statsContainer.appendChild(exactStats);
+            }
+            
+            if (mode === 'asymptotic' || mode === 'both') {
+                const asymptoticStats = document.createElement('div');
+                asymptoticStats.className = 'stat-box asymptotic-stats';
+                asymptoticStats.innerHTML = `
+                    <strong>Asymptotic Formula</strong><br>
+                    Edges: ${asymptoticEdges}<br>
+                    Density: ${asymptoticDensity.toFixed(3)}<br>
+                    ${mode === 'both' ? `Error: ${relativeError.toFixed(1)}%` : ''}
+                `;
+                statsContainer.appendChild(asymptoticStats);
+            }
+            
+            container.appendChild(statsContainer);
+            
+            // Create SVG for exact edges
+            if (mode === 'exact' || mode === 'both') {
+                const exactSvg = createSVG(numNodes, exactEdges, svgSize, radius, centerX, centerY, 'Exact');
+                container.appendChild(exactSvg);
+            }
+            
+            // Create SVG for asymptotic edges
+            if (mode === 'asymptotic' || mode === 'both') {
+                const asymptoticSvg = createSVG(numNodes, asymptoticEdges, svgSize, radius, centerX, centerY, 'Asymptotic');
+                container.appendChild(asymptoticSvg);
+            }
+            
+            return container;
+        }
+
+        function createSVG(numNodes, numEdges, svgSize, radius, centerX, centerY, label) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', svgSize);
+            svg.setAttribute('height', svgSize);
+            svg.setAttribute('class', 'graph-svg');
+            
+            // Add label if showing both
+            if (currentMode === 'both') {
+                const labelText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                labelText.setAttribute('x', svgSize / 2);
+                labelText.setAttribute('y', 15);
+                labelText.setAttribute('text-anchor', 'middle');
+                labelText.setAttribute('font-size', '12');
+                labelText.setAttribute('font-weight', 'bold');
+                labelText.setAttribute('fill', '#333');
+                labelText.textContent = label;
+                svg.appendChild(labelText);
+            }
+            
+            // Get node positions
+            const nodePositions = getNodePositions(numNodes, radius, centerX, centerY);
+            
+            // Generate edges
+            const edges = generateEdges(numNodes, numEdges);
+            
+            // Draw edges first
+            edges.forEach(([node1, node2]) => {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', nodePositions[node1].x);
+                line.setAttribute('y1', nodePositions[node1].y);
+                line.setAttribute('x2', nodePositions[node2].x);
+                line.setAttribute('y2', nodePositions[node2].y);
+                line.setAttribute('class', 'edge');
+                svg.appendChild(line);
+            });
+            
+            // Draw nodes
+            nodePositions.forEach((pos, i) => {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', pos.x);
+                circle.setAttribute('cy', pos.y);
+                circle.setAttribute('r', 12);
+                circle.setAttribute('class', 'node');
+                svg.appendChild(circle);
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', pos.x);
+                text.setAttribute('y', pos.y);
+                text.setAttribute('class', 'node-label');
+                text.textContent = i + 1;
+                svg.appendChild(text);
+            });
+            
+            return svg;
+        }
+
+        function showGraphs(mode) {
+            currentMode = mode;
+            
+            // Update button states
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Clear container
+            const container = document.getElementById('graphsContainer');
+            container.innerHTML = '';
+            
+            // Create graphs
+            graphConfigs.forEach(config => {
+                const graphPanel = createGraph(config, mode);
+                container.appendChild(graphPanel);
+            });
+        }
+
+        // Initialize with exact graphs
+        showGraphs('exact');
+    </script>
+</body>
+</html>

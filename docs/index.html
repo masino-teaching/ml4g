@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Biomedical Applications - Interactive Resources</title>
+    <style>
+        :root {
+            --primary-color: #2980b9;
+            --primary-dark: #1f5f8b;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --sidebar-bg: #ffffff;
+            --border-color: #dee2e6;
+            --text-color: #212529;
+            --text-muted: #6c757d;
+            --hover-bg: #f1f3f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 300px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .nav-section {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-section h3 {
+            padding: 1rem 1.5rem 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0 0 1rem 0;
+            margin: 0;
+        }
+
+        .nav-list li {
+            margin: 0;
+        }
+
+        .nav-list a {
+            display: block;
+            padding: 0.5rem 1.5rem 0.5rem 2rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-list a:hover {
+            background-color: var(--hover-bg);
+            border-left-color: var(--primary-color);
+            color: var(--primary-dark);
+        }
+
+        .nav-list a.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-left-color: var(--primary-dark);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 300px;
+            padding: 2rem 3rem;
+            max-width: calc(100% - 300px);
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .content-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .content-header .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .intro-section h2 {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .intro-section p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 3px;
+            margin-left: 0.5rem;
+        }
+
+        .note {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-left: 4px solid #17a2b8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: #0c5460;
+            margin-bottom: 0.5rem;
+        }
+
+        .note p {
+            margin: 0;
+            color: #0c5460;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 1rem;
+            }
+
+            .content-header h1 {
+                font-size: 2rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 1001;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                padding: 0.5rem;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        /* Links and Interactive Elements */
+        a.external-link {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a.external-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+    
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>Interactive Resources</h1>
+                <p>AI for Biomedical Applications</p>
+            </div>
+
+            <div class="nav-section">
+                <h3>Network Analysis</h3>
+                <ul class="nav-list">
+                    <li><a href="topics/network-metrics/constant_edge_density.html">Constant Edge Density</a></li>
+                    <li><a href="topics/network-metrics/clustering-coefficient.html">Clustering Coefficient</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Machine Learning for Graphs</h1>
+                <p class="subtitle">Complementary materials for Machine Learning for Graphs</p>
+            </header>
+
+            <section class="intro-section">
+                <h2>Welcome to the Interactive Resource Hub</h2>
+                <p>
+                    This website provides interactive demonstrations, visualizations, and Jupyter notebooks 
+                    that complement the materials presented in class. Each resource is designed to help you 
+                    develop a deeper understanding of key concepts in networks science, graph representation learning, and their applications.
+                </p>
+                <p>
+                    Navigate through the topics using the sidebar to explore interactive elements including 
+                    network analysis tools, machine learning visualizations, and application demonstrations.
+                </p>
+
+                <div class="note">
+                    <div class="note-title">Note</div>
+                    <p>
+                        These resources are supplementary to the main course content delivered through Canvas. 
+                        They are designed to provide hands-on exploration of concepts and can be accessed 
+                        at any time during the course.
+                    </p>
+                </div>
+            </section>
+
+            
+
+            <section class="intro-section" style="margin-top: 2rem;">
+                <h2>How to Use These Resources</h2>
+                <p>
+                    Each interactive element is self-contained and can be accessed independently. 
+                    Click on any item in the sidebar navigation to open the corresponding demonstration or notebook.
+                </p>
+                <p>
+                    For Jupyter notebooks, you can view the rendered HTML version directly in your browser, 
+                    or download the source files from the 
+                    <a href="https://github.com/your-username/your-course-repo" class="external-link">course GitHub repository</a> 
+                    to run them locally.
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        // Handle responsive behavior
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
