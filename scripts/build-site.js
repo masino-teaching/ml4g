@@ -44,7 +44,7 @@ const createComponentHTML = (componentName, jsPath, config) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title} - AI for Biomedical Applications</title>
+    <title>${title} - Machine Learning for Graphs</title>
     <meta name="description" content="${description}">
     <link rel="stylesheet" href="../../assets/css/component-page.css">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -57,7 +57,7 @@ const createComponentHTML = (componentName, jsPath, config) => {
     <header class="component-header">
         <nav class="breadcrumb">
             <a href="../../index.html">Home</a> > 
-            <a href="../index.html">Interactive Resources</a> > 
+            <!--<a href="../index.html">Interactive Resources</a> > -->
             <span>${title || componentName}</span>
         </nav>
         <h1>${title}</h1>
