@@ -47,13 +47,14 @@ const createComponentHTML = (componentName, jsPath, config) => {
     <title>${title} - Machine Learning for Graphs</title>
     <meta name="description" content="${description}">
     <link rel="stylesheet" href="../../assets/css/component-page.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <!-- Add other dependencies as needed -->
     <script src="https://unpkg.com/d3@7"></script>
     <script src="https://unpkg.com/plotly.js-dist@2"></script>
 </head>
-<body>
+<body class="component-page">
     <header class="component-header">
         <nav class="breadcrumb">
             <a href="../../index.html">Home</a> > 
@@ -87,19 +88,30 @@ const createComponentHTML = (componentName, jsPath, config) => {
 };
 
 const componentPageCSS = `
-/* Component page styling */
+/* Component page styling - minimal to avoid conflicts with Tailwind */
+:root {
+    --component-primary: #2980b9;
+    --component-bg: #f8f9fa;
+    --component-border: #dee2e6;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
+    background-color: var(--component-bg);
     color: #212529;
     line-height: 1.6;
 }
 
+/* Override Tailwind's default styles only for specific components */
+.component-page * {
+    box-sizing: border-box;
+}
+
 .component-header {
     background: white;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--component-border);
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -111,7 +123,7 @@ body {
 }
 
 .breadcrumb a {
-    color: #2980b9;
+    color: var(--component-primary);
     text-decoration: none;
 }
 
@@ -123,7 +135,7 @@ body {
     margin: 0;
     font-size: 2rem;
     font-weight: 300;
-    color: #2980b9;
+    color: var(--component-primary);
 }
 
 .component-main {
@@ -136,17 +148,18 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     min-height: 500px;
+    padding: 1rem;
 }
 
 .component-footer {
     background: white;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid var(--component-border);
     padding: 1rem 2rem;
     text-align: center;
 }
 
 .component-footer a {
-    color: #2980b9;
+    color: var(--component-primary);
     text-decoration: none;
     font-weight: 500;
 }
