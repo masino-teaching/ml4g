@@ -8,7 +8,7 @@
     "build:components": "node scripts/build-components.js",
     "build:site": "node scripts/build-site.js",
     "build:nav": "node scripts/build-site.js --update-nav",
-    "preview": "vite preview docs",
+    "preview": "vite preview --outDir docs",
     "clean": "rimraf docs/topics/*/dist docs/assets/js/components"
   },
   "devDependencies": {

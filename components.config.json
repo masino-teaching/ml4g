@@ -5,6 +5,18 @@
       "title": "Network Clustering Coefficient",
       "description": "Interactive exploration of network clustering coefficient.",
       "order": 1
+    },
+    "NetworkPathVisualization": {
+      "topic": "network-metrics",
+      "title": "Paths in Networks",
+      "description": "Interactive exploration of paths in networks.",
+      "order": 1
+    },
+    "WalkPathVisualization": {
+      "topic": "network-metrics",
+      "title": "Walks and Paths in Networks",
+      "description": "Interactive exploration of walks and paths in networks.",
+      "order": 1
     }
   },
   "topics": {
@@ -20,7 +32,7 @@
       "title": "Jupyter Notebook Test",
       "description": "A test Jupyter notebook for interactive learning.",
       "github_path": "notebooks/test.ipynb",
-      "order": 10
+      "order": 2
     }
   },
   "repository": {
