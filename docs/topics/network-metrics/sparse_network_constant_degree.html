@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparse Networks with Constant Average Degree</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .comparison-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .network-type {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .dense-network {
+            border-left: 4px solid #4CAF50;
+        }
+        .sparse-network {
+            border-left: 4px solid #FF5722;
+        }
+        .comparison-table {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 8px 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .comparison-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .dense-row {
+            background-color: #e8f5e8;
+        }
+        .sparse-row {
+            background-color: #fce4ec;
+        }
+        .graphs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .graph-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid #FF5722;
+        }
+        .graph-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .graph-stats {
+            background-color: #fce4ec;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .graph-svg {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .node {
+            fill: #FF5722;
+            stroke: #D84315;
+            stroke-width: 2;
+        }
+        .edge {
+            stroke: #666;
+            stroke-width: 1.5;
+        }
+        .node-label {
+            fill: white;
+            font-size: 11px;
+            font-weight: bold;
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+        .formula {
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            border-left: 4px solid #FF5722;
+        }
+        .key-insight {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #FF9800;
+        }
+        .toggle-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .toggle-btn {
+            background: #FF5722;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 5px;
+        }
+        .toggle-btn:hover {
+            background: #E64A19;
+        }
+        .toggle-btn.active {
+            background: #4CAF50;
+        }
+        .degree-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sparse Networks: Constant Average Degree</h1>
+            <div class="formula">
+                <strong>Sparse Network Formula:</strong><br>
+                Edge Density: p = c/n (where c = constant average degree)<br>
+                Total Edges: m = cn/2<br>
+                <strong>For c = 2:</strong> m = n (linear growth vs quadratic in dense networks)
+            </div>
+            
+            <div class="key-insight">
+                <strong>Key Insight:</strong> In sparse networks, edge density decreases as 1/n, but average degree remains constant. 
+                This represents many real-world networks where each node maintains roughly the same number of connections 
+                regardless of network size (e.g., social networks, biological networks).
+            </div>
+        </div>
+
+        <div class="comparison-section">
+            <div class="network-type dense-network">
+                <h3>Dense Networks (Previous Example)</h3>
+                <ul>
+                    <li><strong>Constant density:</strong> p = 0.5</li>
+                    <li><strong>Edge growth:</strong> m ∝ n²</li>
+                    <li><strong>Average degree:</strong> grows with n</li>
+                    <li><strong>Example:</strong> Complete or near-complete graphs</li>
+                </ul>
+            </div>
+            <div class="network-type sparse-network">
+                <h3>Sparse Networks (Current Example)</h3>
+                <ul>
+                    <li><strong>Decreasing density:</strong> p = c/n</li>
+                    <li><strong>Edge growth:</strong> m = cn/2 (linear)</li>
+                    <li><strong>Average degree:</strong> constant (c = 2)</li>
+                    <li><strong>Example:</strong> Social networks, neural networks</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="comparison-table">
+            <h3>Dense vs Sparse Network Comparison</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Network Type</th>
+                        <th>n=4</th>
+                        <th>n=6</th>
+                        <th>n=8</th>
+                        <th>n=10</th>
+                        <th>n=20</th>
+                        <th>n=50</th>
+                        <th>n=100</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="dense-row">
+                        <td><strong>Dense (p=0.5)</strong><br><small>Edges</small></td>
+                        <td>3</td>
+                        <td>8</td>
+                        <td>14</td>
+                        <td>23</td>
+                        <td>95</td>
+                        <td>613</td>
+                        <td>2475</td>
+                    </tr>
+                    <tr class="sparse-row">
+                        <td><strong>Sparse (c=2)</strong><br><small>Edges</small></td>
+                        <td>4</td>
+                        <td>6</td>
+                        <td>8</td>
+                        <td>10</td>
+                        <td>20</td>
+                        <td>50</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Density Ratio</strong><br><small>Dense/Sparse</small></td>
+                        <td>0.75</td>
+                        <td>1.33</td>
+                        <td>1.75</td>
+                        <td>2.30</td>
+                        <td>4.75</td>
+                        <td>12.26</td>
+                        <td>24.75</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="toggle-container">
+            <button class="toggle-btn active" onclick="showGraphs('sparse')">Show Sparse Networks</button>
+            <button class="toggle-btn" onclick="showDegreeDistribution()">Show Degree Analysis</button>
+        </div>
+        
+        <div class="graphs-container" id="graphsContainer">
+        </div>
+    </div>
+
+    <script>
+        // Graph configurations for sparse networks
+        const sparseConfigs = [
+            { nodes: 4, edges: 4, density: 0.500 },
+            { nodes: 6, edges: 6, density: 0.333 },
+            { nodes: 8, edges: 8, density: 0.250 },
+            { nodes: 10, edges: 10, density: 0.200 }
+        ];
+
+        const c = 2; // constant average degree
+
+        // Function to generate edges ensuring roughly equal degree distribution
+        function generateBalancedEdges(numNodes, numEdges) {
+            const edges = [];
+            const nodeDegrees = new Array(numNodes).fill(0);
+            const targetDegree = (2 * numEdges) / numNodes;
+            
+            // Create adjacency list to avoid duplicates
+            const adjList = new Array(numNodes).fill(null).map(() => new Set());
+            
+            let attempts = 0;
+            const maxAttempts = numEdges * 10;
+            
+            while (edges.length < numEdges && attempts < maxAttempts) {
+                attempts++;
+                
+                // Find nodes that are most under their target degree
+                const underDegreeNodes = [];
+                for (let i = 0; i < numNodes; i++) {
+                    if (nodeDegrees[i] < targetDegree + 0.5) {
+                        underDegreeNodes.push(i);
+                    }
+                }
+                
+                if (underDegreeNodes.length < 2) {
+                    // If we can't find enough under-degree nodes, pick any two
+                    const node1 = Math.floor(Math.random() * numNodes);
+                    let node2 = Math.floor(Math.random() * numNodes);
+                    while (node2 === node1) {
+                        node2 = Math.floor(Math.random() * numNodes);
+                    }
+                    
+                    if (!adjList[node1].has(node2)) {
+                        edges.push([node1, node2]);
+                        adjList[node1].add(node2);
+                        adjList[node2].add(node1);
+                        nodeDegrees[node1]++;
+                        nodeDegrees[node2]++;
+                    }
+                } else {
+                    // Pick two random under-degree nodes
+                    const idx1 = Math.floor(Math.random() * underDegreeNodes.length);
+                    let idx2 = Math.floor(Math.random() * underDegreeNodes.length);
+                    while (idx2 === idx1 && underDegreeNodes.length > 1) {
+                        idx2 = Math.floor(Math.random() * underDegreeNodes.length);
+                    }
+                    
+                    const node1 = underDegreeNodes[idx1];
+                    const node2 = underDegreeNodes[idx2];
+                    
+                    if (node1 !== node2 && !adjList[node1].has(node2)) {
+                        edges.push([node1, node2]);
+                        adjList[node1].add(node2);
+                        adjList[node2].add(node1);
+                        nodeDegrees[node1]++;
+                        nodeDegrees[node2]++;
+                    }
+                }
+            }
+            
+            return { edges, nodeDegrees };
+        }
+
+        // Function to position nodes in a circle
+        function getNodePositions(numNodes, radius, centerX, centerY) {
+            const positions = [];
+            for (let i = 0; i < numNodes; i++) {
+                const angle = (2 * Math.PI * i) / numNodes - Math.PI / 2;
+                positions.push({
+                    x: centerX + radius * Math.cos(angle),
+                    y: centerY + radius * Math.sin(angle)
+                });
+            }
+            return positions;
+        }
+
+        // Function to create SVG graph
+        function createSparseGraph(config) {
+            const { nodes: numNodes, edges: numEdges, density } = config;
+            const svgSize = 280;
+            const radius = 80;
+            const centerX = svgSize / 2;
+            const centerY = svgSize / 2;
+            
+            // Calculate statistics
+            const maxEdges = numNodes * (numNodes - 1) / 2;
+            const avgDegree = (2 * numEdges) / numNodes;
+            
+            // Create container
+            const container = document.createElement('div');
+            container.className = 'graph-panel';
+            
+            // Add title and stats
+            container.innerHTML = `
+                <div class="graph-title">Sparse Graph: ${numNodes} nodes</div>
+                <div class="graph-stats">
+                    <strong>Network Properties:</strong><br>
+                    Nodes (n): ${numNodes}<br>
+                    Edges (m): ${numEdges}<br>
+                    Max possible edges: ${maxEdges}<br>
+                    Edge density (p): ${density.toFixed(3)}<br>
+                    Average degree: ${avgDegree.toFixed(1)}
+                    <div class="degree-info">
+                        p = c/n = ${c}/${numNodes} = ${density.toFixed(3)}
+                    </div>
+                </div>
+            `;
+            
+            // Create SVG
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', svgSize);
+            svg.setAttribute('height', svgSize);
+            svg.setAttribute('class', 'graph-svg');
+            
+            // Get node positions
+            const nodePositions = getNodePositions(numNodes, radius, centerX, centerY);
+            
+            // Generate balanced edges
+            const { edges, nodeDegrees } = generateBalancedEdges(numNodes, numEdges);
+            
+            // Draw edges first
+            edges.forEach(([node1, node2]) => {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', nodePositions[node1].x);
+                line.setAttribute('y1', nodePositions[node1].y);
+                line.setAttribute('x2', nodePositions[node2].x);
+                line.setAttribute('y2', nodePositions[node2].y);
+                line.setAttribute('class', 'edge');
+                svg.appendChild(line);
+            });
+            
+            // Draw nodes with degree information
+            nodePositions.forEach((pos, i) => {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', pos.x);
+                circle.setAttribute('cy', pos.y);
+                circle.setAttribute('r', 12);
+                circle.setAttribute('class', 'node');
+                
+                // Add tooltip showing degree
+                const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                title.textContent = `Node ${i + 1}: degree ${nodeDegrees[i]}`;
+                circle.appendChild(title);
+                
+                svg.appendChild(circle);
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', pos.x);
+                text.setAttribute('y', pos.y);
+                text.setAttribute('class', 'node-label');
+                text.textContent = i + 1;
+                svg.appendChild(text);
+            });
+            
+            container.appendChild(svg);
+            return container;
+        }
+
+        function showGraphs(mode) {
+            // Update button states
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Clear container
+            const container = document.getElementById('graphsContainer');
+            container.innerHTML = '';
+            
+            if (mode === 'sparse') {
+                // Create sparse graphs
+                sparseConfigs.forEach(config => {
+                    const graphPanel = createSparseGraph(config);
+                    container.appendChild(graphPanel);
+                });
+            }
+        }
+
+        function showDegreeDistribution() {
+            // Update button states
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Clear container and show degree analysis
+            const container = document.getElementById('graphsContainer');
+            container.innerHTML = `
+                <div class="graph-panel" style="grid-column: 1/-1;">
+                    <div class="graph-title">Degree Distribution Analysis</div>
+                    <div class="graph-stats">
+                        <strong>Key Observations for Sparse Networks (c = 2):</strong><br><br>
+                        
+                        <strong>1. Constant Average Degree:</strong><br>
+                        • Every graph maintains average degree ≈ 2<br>
+                        • Individual node degrees vary around this average<br>
+                        • Total degree = 2m = 2(cn/2) = cn = ${c}n<br><br>
+                        
+                        <strong>2. Scaling Behavior:</strong><br>
+                        • As n increases, density p = c/n decreases<br>
+                        • Number of edges grows linearly: m = n<br>
+                        • Average degree remains constant: ⟨k⟩ = c = ${c}<br><br>
+                        
+                        <strong>3. Real-World Applications:</strong><br>
+                        • Social networks: People maintain ~150 close relationships (Dunbar's number)<br>
+                        • Neural networks: Neurons connect to a limited number of other neurons<br>
+                        • Internet topology: Routers have limited physical connections<br>
+                        • Citation networks: Papers cite a roughly constant number of references<br><br>
+                        
+                        <strong>4. Contrast with Dense Networks:</strong><br>
+                        • Dense: Edge count grows quadratically (n²)<br>
+                        • Sparse: Edge count grows linearly (n)<br>
+                        • Dense networks become increasingly connected; sparse networks maintain local connectivity
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize with sparse graphs
+        showGraphs('sparse');
+    </script>
+</body>
+</html>
