@@ -6,16 +6,16 @@
       "description": "Interactive exploration of network clustering coefficient.",
       "order": 1
     },
-    "NetworkPathVisualization": {
-      "topic": "network-metrics",
-      "title": "Paths in Networks",
-      "description": "Interactive exploration of paths in networks.",
-      "order": 1
-    },
     "WalkPathVisualization": {
       "topic": "network-metrics",
       "title": "Walks and Paths in Networks",
       "description": "Interactive exploration of walks and paths in networks.",
+      "order": 1
+    },
+     "NetworkPathVisualization": {
+      "topic": "network-metrics",
+      "title": "Number of Walks in a Network",
+      "description": "Interactive exploration of the number of walks in a network.",
       "order": 1
     }
   },

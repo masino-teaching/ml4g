@@ -215,3 +215,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .npm
+
+# site build artifacts
+docs/navigation-generated.html

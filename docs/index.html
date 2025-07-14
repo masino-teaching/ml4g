@@ -223,16 +223,29 @@
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
             }
 
             .sidebar.open {
                 transform: translateX(0);
+            }
+            
+            .sidebar.open::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0,0,0,0.5);
+                z-index: -1;
             }
 
             .main-content {
                 margin-left: 0;
                 max-width: 100%;
                 padding: 1rem;
+                padding-top: 4rem; /* Space for mobile menu button */
             }
 
             .content-header h1 {
@@ -248,9 +261,16 @@
                 background: var(--primary-color);
                 color: white;
                 border: none;
-                padding: 0.5rem;
+                padding: 0.75rem;
                 border-radius: 4px;
                 cursor: pointer;
+                font-size: 1.2rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                transition: background-color 0.3s ease;
+            }
+            
+            .mobile-menu-toggle:hover {
+                background: var(--primary-dark);
             }
         }
 
@@ -285,8 +305,8 @@
                 <ul class="nav-list">
                     <li><a href="topics/network-metrics/constant_edge_density.html">Constant Edge Density</a></li>
                     <li><a href="topics/network-metrics/sparse_network_constant_degree.html">Edge Density with Constant Degree</a></li>
-                    <li><a href="topics/network-metrics/network-path-visualization.html">Paths in Networks</a></li>
                     <li><a href="topics/network-metrics/walk-path-visualization.html">Walks and Paths in Networks</a></li>
+                    <li><a href="topics/network-metrics/network-path-visualization.html">Number of Walks in a Network</a></li>
                     <li><a href="topics/network-metrics/clustering-coefficient-demo.html">Network Clustering Coefficient</a></li>
                     <li><a href="https://github.com/masino-teaching/ml4g/blob/main/notebooks/test.ipynb" target="_blank" rel="noopener">Jupyter Notebook Test<span class="badge">Notebook</span></a></li>
                 </ul>
