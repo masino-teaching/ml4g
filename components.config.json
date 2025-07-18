@@ -24,15 +24,20 @@
       "title": "Network Metrics",
       "description": "Graph theory and network metrics fundamentals",
       "order": 1
+    },
+    "metric-algorithms": {
+      "title": "Metric Algorithms and Complexity",
+      "description": "Analyzing complexity of network metric algorithms",
+      "order": 2
     }
   },
   "notebooks": {
-    "test": {
-      "topic": "network-metrics",
-      "title": "Jupyter Notebook Test",
-      "description": "A test Jupyter notebook for interactive learning.",
-      "github_path": "notebooks/test.ipynb",
-      "order": 2
+    "network_node_degree_complexity": {
+      "topic": "metric-algorithms",
+      "title": "Network Node Degree Complexity",
+      "description": "Analyzing the complexity of node degree calculations in networks.",
+      "github_path": "notebooks/network_node_degree_complexity.ipynb",
+      "order": 1
     }
   },
   "repository": {
