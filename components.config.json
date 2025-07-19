@@ -17,6 +17,12 @@
       "title": "Number of Walks in a Network",
       "description": "Interactive exploration of the number of walks in a network.",
       "order": 1
+    },
+    "LocalClusteringCoefficientComputation": {
+      "topic": "metric-algorithms",
+      "title": "Local Clustering Coefficient Computation",
+      "description": "Interactive exploration of local clustering coefficient computation.",
+      "order": 1
     }
   },
   "topics": {
