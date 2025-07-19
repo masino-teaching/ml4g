@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finding Shortest Paths in Networks - Machine Learning for Graphs</title>
+    <meta name="description" content="Interactive exploration of finding shortest paths in networks.">
+    <link rel="stylesheet" href="../../assets/css/component-page.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Add other dependencies as needed -->
+    <script src="https://unpkg.com/d3@7"></script>
+    <script src="https://unpkg.com/plotly.js-dist@2"></script>
+</head>
+<body class="component-page">
+    <header class="component-header">
+        <nav class="breadcrumb">
+            <a href="../../index.html">Home</a> > 
+            <!--<a href="../index.html">Interactive Resources</a> > -->
+            <span>Finding Shortest Paths in Networks</span>
+        </nav>
+        <h1>Finding Shortest Paths in Networks</h1>
+        <p class="component-description">Interactive exploration of finding shortest paths in networks.</p>
+    </header>
+    
+    <main class="component-main">
+        <div id="react-root"></div>
+    </main>
+    
+    <footer class="component-footer">
+        <p><a href="../../index.html">← Back to Course Resources</a></p>
+    </footer>
+    
+    <script src="../../assets/js/components/FindingShortestPathsAlgorithm.js"></script>
+    <script>
+        // Mount the React component
+        if (window.FindingShortestPathsAlgorithm) {
+            ReactDOM.render(React.createElement(window.FindingShortestPathsAlgorithm), document.getElementById('react-root'));
+        } else {
+            console.error('Component FindingShortestPathsAlgorithm not found');
+        }
+    </script>
+</body>
+</html>
