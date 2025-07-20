@@ -29,6 +29,12 @@
       "title": "Finding Shortest Paths in Networks",
       "description": "Interactive exploration of finding shortest paths in networks.",
       "order": 1
+    },
+    "BetweennessCentralityAlgorithm.tsx": {
+      "topic": "metric-algorithms",
+      "title": "Betweenness Centrality Computation",
+      "description": "Interactive exploration of betweenness centrality computation.",
+      "order": 1
     }
   },
   "topics": {
