@@ -218,3 +218,7 @@ yarn-error.log*
 
 # site build artifacts
 docs/navigation-generated.html
+
+# lab related ignores
+labs/output/
+labs/solutions/
