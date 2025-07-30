@@ -1,7 +1,7 @@
 # ml4g
-Course materials and website content for Machine Learning for Graphs course at Clemson University.
+Course materials and website content for Machine Learning for Graphs course at Clemson University. The course materials include presentation slides, Jupyter lab notebooks, and supplementary materials. In additional to original content, the course slides include information from the Stanford University course [Machine Learning with Graphs](http://cs224w.stanford.edu/) and we thank them for generously sharing their material! The Jupyter lab notebooks and supplemental materials are all original content created for this course. This repository includes all components necessary to build the supplemental materials and its associated website: [ml4g course website](https://ml4g.masinolab.com/)
 
-## Adding New Content to the Site
+## Adding New Supplemental Content to the Site
 
 This repository supports three types of content: interactive React components, Jupyter notebooks, and static HTML pages.
 

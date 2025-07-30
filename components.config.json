@@ -35,6 +35,12 @@
       "title": "Betweenness Centrality Computation",
       "description": "Interactive exploration of betweenness centrality computation.",
       "order": 1
+    },
+     "node2vec": {
+      "topic": "shallow-embeddings",
+      "title": "Node2Vec",
+      "description": "Interactive exploration of Node2Vec method.",
+      "order": 1
     }
   },
   "topics": {
@@ -47,6 +53,11 @@
       "title": "Metric Algorithms and Complexity",
       "description": "Analyzing complexity of network metric algorithms",
       "order": 2
+    },
+    "shallow-embeddings": {
+      "title": "Shallow Embeddings",
+      "description": "Exploring shallow embedding methods for networks",
+      "order": 3
     }
   },
   "notebooks": {

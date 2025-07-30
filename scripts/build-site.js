@@ -210,7 +210,7 @@ async function buildSite() {
     const htmlContent = createComponentHTML(componentName, jsPath, componentConfig);
     
     // Convert component name to kebab-case for filename
-    const filename = componentName.replace(/([A-Z])/g, '-$1').toLowerCase().substring(1);
+    const filename = componentName.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
     const outputFile = path.join(outputDir, `${filename}.html`);
     
     await fs.writeFile(outputFile, htmlContent);
@@ -247,7 +247,7 @@ async function generateNavigationUpdate(config) {
       topicGroups[topic] = [];
     }
     
-    const filename = componentName.replace(/([A-Z])/g, '-$1').toLowerCase().substring(1);
+    const filename = componentName.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
     topicGroups[topic].push({
       name: componentName,
       config: componentConfig,
