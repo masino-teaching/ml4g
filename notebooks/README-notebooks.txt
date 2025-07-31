@@ -1,0 +1,2 @@
+The notebooks in this section are supplementary material that illustrate in more depth concepts presented in the course. 
+The course website, ml4g.masinolab.com links to the individual labs in this directory.

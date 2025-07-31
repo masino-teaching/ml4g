@@ -1,4 +1,5 @@
-The labs in this directory are provided in a Goolge Colab version and a linux/mac version. The linux/mac versions were tested
+The labs in this directory are intended for in class presentation with student exercises to be completed in class. The labs
+are provided in a Goolge Colab version and a linux/mac version. The linux/mac versions were tested
 in conda environments with setup using the following configurations.
 
 # ---------- MAC SETUP ------------
