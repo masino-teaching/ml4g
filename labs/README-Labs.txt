@@ -26,7 +26,7 @@ pip install torch torchvision torchaudio torch_geometric
 
 pip install torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.2.0+cpu.html
 
-pip install -U networkx pydot lxml scikit-learn pandas matplotlib seaborn jupyterlab lightning torchmetrics
+pip install -U networkx pydot lxml scikit-learn pandas matplotlib seaborn jupyterlab lightning torchmetrics umap-learn
 
 
 # ---------- Linux (Palmetto Setup) ----------
@@ -42,6 +42,6 @@ pip install torch_geometric
 
 pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.7.0+cu118.html
 
-pip install -U networkx pygraphviz pydot lxml scikit-learn pandas matplotlib seaborn jupyterlab lightning torchmetrics
+pip install -U networkx pygraphviz pydot lxml scikit-learn pandas matplotlib seaborn jupyterlab lightning torchmetrics umap-learn
 
 python -m ipykernel install --user --name ml4g --display-name ml4g
