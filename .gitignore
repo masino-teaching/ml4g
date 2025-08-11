@@ -222,3 +222,6 @@ docs/navigation-generated.html
 # lab related ignores
 labs/output/
 labs/solutions/
+
+# homeworks related ignores
+homeworks/solutions/
