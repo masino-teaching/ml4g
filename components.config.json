@@ -41,7 +41,13 @@
       "title": "Node2Vec",
       "description": "Interactive exploration of Node2Vec method.",
       "order": 1
-    }
+    },
+     "GnnPermutationDemo": {
+      "topic": "gnns",
+      "title": "Permutation Invariance & Equivariance",
+      "description": "Interactive exploration of permutation invariance and equivariance in GNNs.",
+      "order": 1
+     }
   },
   "topics": {
     "network-metrics": {
@@ -58,6 +64,11 @@
       "title": "Shallow Embeddings",
       "description": "Exploring shallow embedding methods for networks",
       "order": 3
+    },
+    "gnns": {
+      "title": "Graph Neural Networks",
+      "description": "Exploring graph neural networks",
+      "order": 4
     }
   },
   "notebooks": {
