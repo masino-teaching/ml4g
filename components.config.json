@@ -78,6 +78,13 @@
       "description": "Analyzing the complexity of node degree calculations in networks.",
       "github_path": "notebooks/network_node_degree_complexity.ipynb",
       "order": 1
+    },
+    "RGCN-with-block-diagonal-weights": {
+      "topic": "gnns",
+      "title": "Block Diagonal Weights in RGCN",
+      "description": "Implementing block diagonal weights in heterogeneous graph neural networks.",
+      "github_path": "notebooks/RGCN-with-block-diagonal-weights.ipynb",
+      "order": 1
     }
   },
   "repository": {
