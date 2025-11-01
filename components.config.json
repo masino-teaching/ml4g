@@ -69,6 +69,11 @@
       "title": "Graph Neural Networks",
       "description": "Exploring graph neural networks",
       "order": 4
+    },
+    "foundation_models": {
+      "title": "Graph Foundation Models",
+      "description": "Exploring foundation models for graphs",
+      "order": 5
     }
   },
   "notebooks": {
@@ -85,6 +90,13 @@
       "description": "Implementing block diagonal weights in heterogeneous graph neural networks.",
       "github_path": "notebooks/RGCN-with-block-diagonal-weights.ipynb",
       "order": 1
+    },
+    "ingram": {
+      "topic": "foundation_models",
+      "title": "InGram: Relation Adjacency Matrix",
+      "description": "Implementing the relation adjacency matrix from Ingram et al.",
+      "github_path": "labs/ingram.ipynb",
+      "order": 2
     }
   },
   "repository": {
