@@ -95,7 +95,7 @@
       "topic": "foundation_models",
       "title": "InGram: Relation Adjacency Matrix",
       "description": "Implementing the relation adjacency matrix from Ingram et al.",
-      "github_path": "labs/ingram.ipynb",
+      "github_path": "notebooks/ingram.ipynb",
       "order": 2
     }
   },
