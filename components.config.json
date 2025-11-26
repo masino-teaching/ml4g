@@ -74,6 +74,11 @@
       "title": "Graph Foundation Models",
       "description": "Exploring foundation models for graphs",
       "order": 5
+    },
+    "generative_models": {
+      "title": "Graph Generative Models",
+      "description": "Exploring generative models for graphs",
+      "order": 6
     }
   },
   "notebooks": {
@@ -97,6 +102,13 @@
       "description": "Implementing the relation adjacency matrix from Ingram et al.",
       "github_path": "notebooks/ingram.ipynb",
       "order": 2
+    },
+    "graph-gen-traditional": {
+      "topic": "generative_models",
+      "title": "Traditional Graph Generation Methods",
+      "description": "Exploring traditional methods for graph generation.",
+      "github_path": "notebooks/graph-gen-traditional.ipynb",
+      "order": 3
     }
   },
   "repository": {
