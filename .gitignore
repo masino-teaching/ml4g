@@ -225,3 +225,4 @@ labs/solutions/
 
 # homeworks related ignores
 homeworks/solutions/
+notebooks/tmp*.*
